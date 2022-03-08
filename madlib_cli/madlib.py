@@ -37,13 +37,15 @@ def parse_template(script):
     # to return the string obtained by replacing the leftmost non-overlapping occurrences of the regex pattern in string with repl.
     replace_sub_string = re.sub(r'\{.*?\}', "{}", script)
 
-    return replace_sub_string, removed_brackets
+    return replace_sub_string, tuple(removed_brackets)
 
 
 def merge(script, inputs):
     """
-    inserts th user input inputs and returns them
+    inserts th user input inputs and returns them + Also creates a new text file
     """
+    txt = open('madlib_cli/assets/new_text.txt', 'w')
+    txt.write(script.format(*inputs))
     return script.format(*inputs)
 
 
